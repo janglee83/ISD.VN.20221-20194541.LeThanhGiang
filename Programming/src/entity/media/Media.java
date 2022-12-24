@@ -45,12 +45,23 @@ public class Media {
         //stm = AIMSDB.getConnection().createStatement();
     }
 
+    
+    /** 
+     * @return int
+     * @throws SQLException
+     */
     public int getQuantity() throws SQLException{
         int updated_quantity = getMediaById(id).quantity;
         this.quantity = updated_quantity;
         return updated_quantity;
     }
 
+    
+    /** 
+     * @param id
+     * @return Media
+     * @throws SQLException
+     */
     public Media getMediaById(int id) throws SQLException{
         String sql = "SELECT * FROM Media ;";
         Statement stm = AIMSDB.getConnection().createStatement();
@@ -69,6 +80,11 @@ public class Media {
         return null;
     }
 
+    
+    /** 
+     * @return List
+     * @throws SQLException
+     */
     public List getAllMedia() throws SQLException{
         Statement stm = AIMSDB.getConnection().createStatement();
         ResultSet res = stm.executeQuery("select * from Media");
@@ -87,6 +103,14 @@ public class Media {
         return medium;
     }
 
+    
+    /** 
+     * @param tbname
+     * @param id
+     * @param field
+     * @param value
+     * @throws SQLException
+     */
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         if (value instanceof String){
@@ -97,70 +121,137 @@ public class Media {
                           + "where id=" + id + ";");
     }
 
+    
+    /** 
+     * @return int
+     */
     // getter and setter 
     public int getId() {
         return this.id;
     }
 
+    
+    /** 
+     * @param id
+     * @return Media
+     */
     private Media setId(int id){
         this.id = id;
         return this;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getTitle() {
         return this.title;
     }
 
+    
+    /** 
+     * @param title
+     * @return Media
+     */
     public Media setTitle(String title) {
         this.title = title;
         return this;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getCategory() {
         return this.category;
     }
 
+    
+    /** 
+     * @param category
+     * @return Media
+     */
     public Media setCategory(String category) {
         this.category = category;
         return this;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getPrice() {
         return this.price;
     }
 
+    
+    /** 
+     * @param price
+     * @return Media
+     */
     public Media setPrice(int price) {
         this.price = price;
         return this;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getImageURL(){
         return this.imageURL;
     }
 
+    
+    /** 
+     * @param url
+     * @return Media
+     */
     public Media setMediaURL(String url){
         this.imageURL = url;
         return this;
     }
 
+    
+    /** 
+     * @param quantity
+     * @return Media
+     */
     public Media setQuantity(int quantity) {
         this.quantity = quantity;
         return this;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getType() {
         return this.type;
     }
 
+    
+    /** 
+     * @param type
+     * @return Media
+     */
     public Media setType(String type) {
         this.type = type;
         return this;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public static boolean getIsSupportedPlaceRushOrder() {
         return Media.isSupportedPlaceRushOrder;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "{" +

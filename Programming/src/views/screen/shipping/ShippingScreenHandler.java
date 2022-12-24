@@ -22,85 +22,105 @@ import javafx.stage.Stage;
 import utils.Configs;
 import views.screen.BaseScreenHandler;
 import views.screen.invoice.InvoiceScreenHandler;
-import views.screen.popup.PopupScreen;
 
 public class ShippingScreenHandler extends BaseScreenHandler implements Initializable {
 
-	@FXML
-	private Label screenTitle;
+  @FXML
+  private Label screenTitle;
 
-	@FXML
-	private TextField name;
+  @FXML
+  private TextField name;
 
-	@FXML
-	private TextField phone;
+  @FXML
+  private TextField phone;
 
-	@FXML
-	private TextField address;
+  @FXML
+  private TextField address;
 
-	@FXML
-	private TextField instructions;
+  @FXML
+  private TextField instructions;
 
-	@FXML
-	private ComboBox<String> province;
+  @FXML
+  private ComboBox<String> province;
 
-	private Order order;
+  private Order order;
 
-	public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
-		super(stage, screenPath);
-		this.order = order;
-	}
+  public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
+    super(stage, screenPath);
+    this.order = order;
+  }
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		final BooleanProperty firstTime = new SimpleBooleanProperty(true); // Variable to store the focus on stage load
-		name.focusedProperty().addListener((observable,  oldValue,  newValue) -> {
-            if(newValue && firstTime.get()){
-                content.requestFocus(); // Delegate the focus to container
-                firstTime.setValue(false); // Variable value changed for future references
-            }
-        });
-		this.province.getItems().addAll(Configs.PROVINCES);
-	}
+  /**
+   * @param arg0
+   * @param arg1
+   */
+  @Override
+  public void initialize(URL arg0, ResourceBundle arg1) {
+    final BooleanProperty firstTime = new SimpleBooleanProperty(true); // Variable to store the focus on stage load
+    name.focusedProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue && firstTime.get()) {
+        content.requestFocus(); // Delegate the focus to container
+        firstTime.setValue(false); // Variable value changed for future references
+      }
+    });
+    this.province.getItems().addAll(Configs.PROVINCES);
+  }
 
-	@FXML
-	void submitDeliveryInfo(MouseEvent event) throws IOException, InterruptedException, SQLException {
+  /**
+   * @param event
+   * @throws IOException
+   * @throws InterruptedException
+   * @throws SQLException
+   */
+  @FXML
+  void submitDeliveryInfo(MouseEvent event) throws IOException, InterruptedException, SQLException {
 
-		// add info to messages
-		HashMap messages = new HashMap<>();
-		messages.put("name", name.getText());
-		messages.put("phone", phone.getText());
-		messages.put("address", address.getText());
-		messages.put("instructions", instructions.getText());
-		messages.put("province", province.getValue());
-		try {
-			// process and validate delivery info
-			getBController().processDeliveryInfo(messages);
-		} catch (InvalidDeliveryInfoException e) {
-			throw new InvalidDeliveryInfoException(e.getMessage());
-		}
-	
-		// calculate shipping fees
-		int shippingFees = getBController().calculateShippingFee(order);
-		order.setShippingFees(shippingFees);
-		order.setDeliveryInfo(messages);
-		
-		// create invoice screen
-		Invoice invoice = getBController().createInvoice(order);
-		BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, Configs.INVOICE_SCREEN_PATH, invoice);
-		InvoiceScreenHandler.setPreviousScreen(this);
-		InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
-		InvoiceScreenHandler.setScreenTitle("Invoice Screen");
-		InvoiceScreenHandler.setBController(getBController());
-		InvoiceScreenHandler.show();
-	}
+    // add info to messages
+    HashMap messages = new HashMap<>();
+    messages.put("name", name.getText());
+    messages.put("phone", phone.getText());
+    messages.put("address", address.getText());
+    messages.put("instructions", instructions.getText());
+    messages.put("province", province.getValue());
+    try {
+      // process and validate delivery info
+      getBController().processDeliveryInfo(messages);
+    } catch (InvalidDeliveryInfoException e) {
+      throw new InvalidDeliveryInfoException(e.getMessage());
+    }
 
-	public PlaceOrderController getBController(){
-		return (PlaceOrderController) super.getBController();
-	}
+    // calculate shipping fees
+    int shippingFees = getBController().calculateShippingFee(order);
+    order.setShippingFees(shippingFees);
+    order.setDeliveryInfo(messages);
 
-	public void notifyError(){
-		// TODO: implement later on if we need
-	}
+    // // create invoice screen
+    Invoice invoice = getBController().createInvoice(order);
+    BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, Configs.INVOICE_SCREEN_PATH, invoice);
+    InvoiceScreenHandler.setPreviousScreen(this);
+    InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
+    InvoiceScreenHandler.setScreenTitle("Invoice Screen");
+    InvoiceScreenHandler.setBController(getBController());
+    InvoiceScreenHandler.show();
+
+	//create delivery method screen
+	BaseScreenHandler DeliveryMethodsScreenHandler = new DeliveryMethodsScreenHandler(this.stage, Configs.DELIVERY_METHODS_PATH, this.order);
+	DeliveryMethodsScreenHandler.setPreviousScreen(this);
+	DeliveryMethodsScreenHandler.setHomeScreenHandler(homeScreenHandler);
+	DeliveryMethodsScreenHandler.setScreenTitle("Delivery method screen");
+	DeliveryMethodsScreenHandler.setBController(getBController());
+	DeliveryMethodsScreenHandler.show();
+  }
+
+  /**
+   * @return PlaceOrderController
+   */
+  public PlaceOrderController getBController() {
+    return (PlaceOrderController) super.getBController();
+  }
+
+  public void notifyError() {
+    // TODO: implement later on if we need
+  }
 
 }

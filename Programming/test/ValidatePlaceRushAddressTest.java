@@ -10,6 +10,10 @@ public class ValidatePlaceRushAddressTest {
     
     private PlaceOrderController placeOrderController;
 
+    
+    /** 
+     * @throws Exception
+     */
     @BeforeEach
     void setUp() throws Exception {
         placeOrderController = new PlaceOrderController();

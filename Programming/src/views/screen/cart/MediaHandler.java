@@ -65,6 +65,10 @@ public class MediaHandler extends FXMLScreenHandler {
 		hboxMedia.setAlignment(Pos.CENTER);
 	}
 	
+	
+	/** 
+	 * @param cartMedia
+	 */
 	public void setCartMedia(CartMedia cartMedia) {
 		this.cartMedia = cartMedia;
 		setMediaInfo();

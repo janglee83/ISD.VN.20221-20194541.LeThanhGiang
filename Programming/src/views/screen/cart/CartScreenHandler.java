@@ -81,18 +81,35 @@ public class CartScreenHandler extends BaseScreenHandler {
 		});
 	}
 
+	
+	/** 
+	 * @return Label
+	 */
 	public Label getLabelAmount() {
 		return labelAmount;
 	}
 
+	
+	/** 
+	 * @return Label
+	 */
 	public Label getLabelSubtotal() {
 		return labelSubtotal;
 	}
 
+	
+	/** 
+	 * @return ViewCartController
+	 */
 	public ViewCartController getBController(){
 		return (ViewCartController) super.getBController();
 	}
 
+	
+	/** 
+	 * @param prevScreen
+	 * @throws SQLException
+	 */
 	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
 		setPreviousScreen(prevScreen);
 		setScreenTitle("Cart Screen");
@@ -101,6 +118,11 @@ public class CartScreenHandler extends BaseScreenHandler {
 		show();
 	}
 
+	
+	/** 
+	 * @throws SQLException
+	 * @throws IOException
+	 */
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order
@@ -132,6 +154,10 @@ public class CartScreenHandler extends BaseScreenHandler {
 		}
 	}
 
+	
+	/** 
+	 * @throws SQLException
+	 */
 	public void updateCart() throws SQLException{
 		getBController().checkAvailabilityOfProduct();
 		displayCartWithMediaAvailability();

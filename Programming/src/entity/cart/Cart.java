@@ -12,6 +12,10 @@ public class Cart {
     private List<CartMedia> lstCartMedia;
     private static Cart cartInstance;
 
+    
+    /** 
+     * @return Cart
+     */
     public static Cart getCart(){
         if(cartInstance == null) cartInstance = new Cart();
         return cartInstance;
@@ -21,14 +25,26 @@ public class Cart {
         lstCartMedia = new ArrayList<>();
     }
 
+    
+    /** 
+     * @param cm
+     */
     public void addCartMedia(CartMedia cm){
         lstCartMedia.add(cm);
     }
 
+    
+    /** 
+     * @param cm
+     */
     public void removeCartMedia(CartMedia cm){
         lstCartMedia.remove(cm);
     }
 
+    
+    /** 
+     * @return List
+     */
     public List getListMedia(){
         return lstCartMedia;
     }
@@ -37,6 +53,10 @@ public class Cart {
         lstCartMedia.clear();
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getTotalMedia(){
         int total = 0;
         for (Object obj : lstCartMedia) {
@@ -46,6 +66,10 @@ public class Cart {
         return total;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int calSubtotal(){
         int total = 0;
         for (Object obj : lstCartMedia) {
@@ -55,6 +79,10 @@ public class Cart {
         return total;
     }
 
+    
+    /** 
+     * @throws SQLException
+     */
     public void checkAvailabilityOfProduct() throws SQLException{
         boolean allAvai = true;
         for (Object object : lstCartMedia) {
@@ -66,6 +94,11 @@ public class Cart {
         if (!allAvai) throw new MediaNotAvailableException("Some media not available");
     }
 
+    
+    /** 
+     * @param media
+     * @return CartMedia
+     */
     public CartMedia checkMediaInCart(Media media){
         for (CartMedia cartMedia : lstCartMedia) {
             if (cartMedia.getMedia().getId() == media.getId()) return cartMedia;

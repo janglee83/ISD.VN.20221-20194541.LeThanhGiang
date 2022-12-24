@@ -19,6 +19,10 @@ public class PaymentTransaction {
 		this.createdAt = createdAt;
 	}
 	
+	
+	/** 
+	 * @return String
+	 */
 	public String getErrorCode() {
 		return errorCode;
 	}
