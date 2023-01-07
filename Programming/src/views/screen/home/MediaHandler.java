@@ -75,7 +75,7 @@ public class MediaHandler extends FXMLScreenHandler{
                 } catch (Exception e) {
                     LOGGER.severe("Cannot add media to cart: ");
                 }
-                
+
             } catch (Exception exp) {
                 LOGGER.severe("Cannot add media to cart: ");
                 exp.printStackTrace();
@@ -105,5 +105,5 @@ public class MediaHandler extends FXMLScreenHandler{
 
         setImage(mediaImage, media.getImageURL());
     }
-    
+
 }

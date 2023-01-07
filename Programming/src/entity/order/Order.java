@@ -7,7 +7,7 @@ import java.util.List;
 import utils.Configs;
 
 public class Order {
-    
+
     private int shippingFees;
     private List lstOrderMedia;
     private HashMap<String, String> deliveryInfo;
@@ -47,6 +47,10 @@ public class Order {
     public HashMap getDeliveryInfo() {
         return deliveryInfo;
     }
+
+	public String setDeliveryInfoField(String key, String value) {
+		return this.deliveryInfo.put(key, value);
+	}
 
     public void setDeliveryInfo(HashMap deliveryInfo) {
         this.deliveryInfo = deliveryInfo;

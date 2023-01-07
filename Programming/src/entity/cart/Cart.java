@@ -8,7 +8,7 @@ import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 
 public class Cart {
-    
+
     private List<CartMedia> lstCartMedia;
     private static Cart cartInstance;
 
@@ -66,9 +66,9 @@ public class Cart {
         if (!allAvai) throw new MediaNotAvailableException("Some media not available");
     }
 
-    public CartMedia checkMediaInCart(Media media){
+    public CartMedia checkMediaInCart(int mediaId){
         for (CartMedia cartMedia : lstCartMedia) {
-            if (cartMedia.getMedia().getId() == media.getId()) return cartMedia;
+            if (cartMedia.getMedia().getId() == mediaId) return cartMedia;
         }
         return null;
     }

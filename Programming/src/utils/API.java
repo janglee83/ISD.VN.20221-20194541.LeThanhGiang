@@ -22,7 +22,6 @@ import entity.payment.PaymentTransaction;
 
 public class API {
 
-	public static DateFormat DATE_FORMATER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private static Logger LOGGER = Utils.getLogger(Utils.class.getName());
 
 	public static String get(String url, String token) throws Exception {

@@ -7,16 +7,18 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import common.exception.InvalidDeliveryInfoException;
 import entity.cart.Cart;
 import entity.cart.CartMedia;
 import entity.invoice.Invoice;
 import entity.media.Media;
 import entity.order.Order;
 import entity.order.OrderMedia;
+import validate.PlaceOrderValidateData;
 
 /**
  * This class controls the flow of place order usecase in our AIMS project
- * 
+ *
  * @author nguyenlm
  */
 public class PlaceOrderController extends BaseController {
@@ -29,7 +31,7 @@ public class PlaceOrderController extends BaseController {
     /**
      * This method checks the avalibility of product when user click PlaceOrder
      * button
-     * 
+     *
      * @throws SQLException
      */
     public void placeOrder() throws SQLException {
@@ -38,7 +40,7 @@ public class PlaceOrderController extends BaseController {
 
     /**
      * This method creates the new Order based on the Cart
-     * 
+     *
      * @return Order
      * @throws SQLException
      */
@@ -56,7 +58,7 @@ public class PlaceOrderController extends BaseController {
 
     /**
      * This method creates the new Invoice based on order
-     * 
+     *
      * @param order
      * @return Invoice
      */
@@ -66,7 +68,7 @@ public class PlaceOrderController extends BaseController {
 
     /**
      * This method takes responsibility for processing the shipping info from user
-     * 
+     *
      * @param info
      * @throws InterruptedException
      * @throws IOException
@@ -79,60 +81,24 @@ public class PlaceOrderController extends BaseController {
 
     /**
      * The method validates the info
-     * 
+     *
      * @param info
      * @throws InterruptedException
      * @throws IOException
      */
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException {
+		PlaceOrderValidateData placeOrderValidateData = new PlaceOrderValidateData();
 
-    }
-
-    public boolean validatePhoneNumber(String phoneNumber) {
-        // check the phoneNumber has 10 digits
-        if (phoneNumber.length() != 10)
-            return false;
-        if (Character.compare(phoneNumber.charAt(0), '0') != 0)
-            return false; 
-        // check the phoneNumber contains only number
-        try {
-            Integer.parseInt(phoneNumber);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public boolean validateName(String name) {
-        // Check name is not null
-        if (name == null)
-            return false;
-        // Check if contain leter space only
-        if (name.trim().length() == 0)
-            return false;
-        // Check if contain only leter and space
-        if (name.matches("^[a-zA-Z ]*$") == false)
-            return false;
-        return true;
-    }
-
-    public boolean validateAddress(String address) {
-        // Check address is not null
-        if (address == null)
-            return false;
-        // Check if contain leter space only
-        if (address.trim().length() == 0)
-            return false;
-        // Check if contain only leter and space
-        if (address.matches("^[a-zA-Z ]*$") == false)
-            return false;
-        return true;
+		if (placeOrderValidateData.validateAddress(info.get("address"))
+			&& placeOrderValidateData.validateName(info.get("name"))
+			&& placeOrderValidateData.validatePhoneNumber(info.get("phone"))) {
+				throw new InvalidDeliveryInfoException("Invalid delivery info");
+		}
     }
 
     /**
      * This method calculates the shipping fees of order
-     * 
+     *
      * @param order
      * @return shippingFee
      */
@@ -145,7 +111,7 @@ public class PlaceOrderController extends BaseController {
 
     /**
      * This method get product available place rush order media
-     * 
+     *
      * @param order
      * @return media
      * @throws SQLException
@@ -162,7 +128,9 @@ public class PlaceOrderController extends BaseController {
     }
 
     public boolean validateAddressPlaceRushOrder(String province, String address) {
-        if (!validateAddress(address))
+		PlaceOrderValidateData placeOrderValidateData = new PlaceOrderValidateData();
+
+        if (!placeOrderValidateData.validateAddress(address))
             return false;
         if(!province.equals("Hà Nội"))
             return false;
