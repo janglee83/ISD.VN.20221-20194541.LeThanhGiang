@@ -87,6 +87,11 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 
 	}
 
+	
+	/** 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void confirmInvoice(MouseEvent event) throws IOException {
 		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH, invoice);

@@ -11,7 +11,11 @@ public class ValidateMeidaPlaceRushOrderTest {
     
     private PlaceOrderController placeOrderController;
 
-    @BeforeEach
+    
+	/** 
+	 * @throws Exception
+	 */
+	@BeforeEach
     void setup() throws Exception {
         placeOrderController = new PlaceOrderController();
     }

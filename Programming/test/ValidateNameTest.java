@@ -8,6 +8,10 @@ class ValidateNameTest {
     
     private PlaceOrderController placeOrderController;
 
+    
+    /** 
+     * @throws Exception
+     */
     @BeforeEach
     public void setUp() throws Exception {
         placeOrderController = new PlaceOrderController();

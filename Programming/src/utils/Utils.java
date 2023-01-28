@@ -21,10 +21,20 @@ public class Utils {
 		System.setProperty("java.util.logging.SimpleFormatter.format", "[%4$-4s] [%1$tF %1$tT] [%2$-7s] %5$s %n");
 	}
 
+	
+	/** 
+	 * @param className
+	 * @return Logger
+	 */
 	public static Logger getLogger(String className) {
 		return Logger.getLogger(className);
 	}
 
+	
+	/** 
+	 * @param num
+	 * @return String
+	 */
 	public static String getCurrencyFormat(int num) {
 		Locale vietname = new Locale("vi", "VN");
 		NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(vietname);

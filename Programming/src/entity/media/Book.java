@@ -35,74 +35,147 @@ public class Book extends Media {
         this.bookCategory = bookCategory;
     }
 
+    
+    /** 
+     * @return int
+     */
     // getter and setter
     public int getId() {
         return this.id;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getAuthor() {
         return this.author;
     }
 
+    
+    /** 
+     * @param author
+     * @return Book
+     */
     public Book setAuthor(String author) {
         this.author = author;
         return this;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getCoverType() {
         return this.coverType;
     }
 
+    
+    /** 
+     * @param coverType
+     * @return Book
+     */
     public Book setCoverType(String coverType) {
         this.coverType = coverType;
         return this;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getPublisher() {
         return this.publisher;
     }
 
+    
+    /** 
+     * @param publisher
+     * @return Book
+     */
     public Book setPublisher(String publisher) {
         this.publisher = publisher;
         return this;
     }
 
+    
+    /** 
+     * @return Date
+     */
     public Date getPublishDate() {
         return this.publishDate;
     }
 
+    
+    /** 
+     * @param publishDate
+     * @return Book
+     */
     public Book setPublishDate(Date publishDate) {
         this.publishDate = publishDate;
         return this;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNumOfPages() {
         return this.numOfPages;
     }
 
+    
+    /** 
+     * @param numOfPages
+     * @return Book
+     */
     public Book setNumOfPages(int numOfPages) {
         this.numOfPages = numOfPages;
         return this;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getLanguage() {
         return this.language;
     }
 
+    
+    /** 
+     * @param language
+     * @return Book
+     */
     public Book setLanguage(String language) {
         this.language = language;
         return this;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getBookCategory() {
         return this.bookCategory;
     }
 
+    
+    /** 
+     * @param bookCategory
+     * @return Book
+     */
     public Book setBookCategory(String bookCategory) {
         this.bookCategory = bookCategory;
         return this;
     }
 
+    
+    /** 
+     * @param id
+     * @return Media
+     * @throws SQLException
+     */
     @Override
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM "+
@@ -138,12 +211,20 @@ public class Book extends Media {
 		}
     }
 
+    
+    /** 
+     * @return List
+     */
     @Override
     public List getAllMedia() {
         return null;
     }
 
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "{" +

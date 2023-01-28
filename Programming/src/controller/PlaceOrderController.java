@@ -88,6 +88,11 @@ public class PlaceOrderController extends BaseController {
 
     }
 
+    
+    /** 
+     * @param phoneNumber
+     * @return boolean
+     */
     public boolean validatePhoneNumber(String phoneNumber) {
         // check the phoneNumber has 10 digits
         if (phoneNumber.length() != 10)
@@ -104,6 +109,11 @@ public class PlaceOrderController extends BaseController {
         return true;
     }
 
+    
+    /** 
+     * @param name
+     * @return boolean
+     */
     public boolean validateName(String name) {
         // Check name is not null
         if (name == null)
@@ -117,6 +127,11 @@ public class PlaceOrderController extends BaseController {
         return true;
     }
 
+    
+    /** 
+     * @param address
+     * @return boolean
+     */
     public boolean validateAddress(String address) {
         // Check address is not null
         if (address == null)
@@ -161,6 +176,12 @@ public class PlaceOrderController extends BaseController {
         return media;
     }
 
+    
+    /** 
+     * @param province
+     * @param address
+     * @return boolean
+     */
     public boolean validateAddressPlaceRushOrder(String province, String address) {
         if (!validateAddress(address))
             return false;
@@ -169,6 +190,10 @@ public class PlaceOrderController extends BaseController {
         return true;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean validateMediaPlaceRushorder() {
         if (Media.getIsSupportedPlaceRushOrder())
             return true;
