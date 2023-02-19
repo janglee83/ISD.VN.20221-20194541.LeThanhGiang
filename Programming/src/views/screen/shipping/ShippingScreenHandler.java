@@ -79,12 +79,12 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 		} catch (InvalidDeliveryInfoException e) {
 			throw new InvalidDeliveryInfoException(e.getMessage());
 		}
-	
+
 		// calculate shipping fees
 		int shippingFees = getBController().calculateShippingFee(order);
 		order.setShippingFees(shippingFees);
 		order.setDeliveryInfo(messages);
-		
+
 		// create invoice screen
 		Invoice invoice = getBController().createInvoice(order);
 		BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, Configs.INVOICE_SCREEN_PATH, invoice);
